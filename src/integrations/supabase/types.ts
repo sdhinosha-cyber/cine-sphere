@@ -14,7 +14,181 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      booked_seats: {
+        Row: {
+          booking_id: string | null
+          id: string
+          seat_code: string
+          showtime_id: string
+        }
+        Insert: {
+          booking_id?: string | null
+          id?: string
+          seat_code: string
+          showtime_id: string
+        }
+        Update: {
+          booking_id?: string | null
+          id?: string
+          seat_code?: string
+          showtime_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booked_seats_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "booked_seats_showtime_id_fkey"
+            columns: ["showtime_id"]
+            isOneToOne: false
+            referencedRelation: "showtimes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bookings: {
+        Row: {
+          created_at: string
+          id: string
+          reference: string
+          seats: string[]
+          showtime_id: string
+          status: string
+          total_amount: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          reference: string
+          seats: string[]
+          showtime_id: string
+          status?: string
+          total_amount: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          reference?: string
+          seats?: string[]
+          showtime_id?: string
+          status?: string
+          total_amount?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_showtime_id_fkey"
+            columns: ["showtime_id"]
+            isOneToOne: false
+            referencedRelation: "showtimes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      movies: {
+        Row: {
+          certificate: string
+          created_at: string
+          duration_min: number
+          genre: string
+          id: string
+          language: string
+          movie_cast: string[]
+          rating: number
+          slug: string
+          synopsis: string
+          title: string
+        }
+        Insert: {
+          certificate?: string
+          created_at?: string
+          duration_min: number
+          genre: string
+          id?: string
+          language: string
+          movie_cast?: string[]
+          rating?: number
+          slug: string
+          synopsis: string
+          title: string
+        }
+        Update: {
+          certificate?: string
+          created_at?: string
+          duration_min?: number
+          genre?: string
+          id?: string
+          language?: string
+          movie_cast?: string[]
+          rating?: number
+          slug?: string
+          synopsis?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id: string
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+        }
+        Relationships: []
+      }
+      showtimes: {
+        Row: {
+          id: string
+          movie_id: string
+          screen: string
+          starts_at: string
+          theatre: string
+          total_seats: number
+        }
+        Insert: {
+          id?: string
+          movie_id: string
+          screen: string
+          starts_at: string
+          theatre?: string
+          total_seats?: number
+        }
+        Update: {
+          id?: string
+          movie_id?: string
+          screen?: string
+          starts_at?: string
+          theatre?: string
+          total_seats?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "showtimes_movie_id_fkey"
+            columns: ["movie_id"]
+            isOneToOne: false
+            referencedRelation: "movies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
