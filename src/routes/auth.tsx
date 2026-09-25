@@ -192,7 +192,10 @@ function AuthPage() {
             {isRegister ? "Already have an account?" : "New to Cineverse?"}{" "}
             <Link
               to="/auth"
-              search={{ mode: isRegister ? "login" : "register", redirect }}
+              search={{
+                mode: isRegister ? ("login" as const) : ("register" as const),
+                ...(redirect ? { redirect } : {}),
+              }}
               className="font-medium text-primary hover:underline"
             >
               {isRegister ? "Log in" : "Register"}
