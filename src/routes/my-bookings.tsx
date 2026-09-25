@@ -21,7 +21,7 @@ export const Route = createFileRoute("/my-bookings")({
       { property: "og:description", content: "Your ticket history and booking references." },
     ],
   }),
-  component: MyBookings;
+  component: MyBookings,
 });
 
 type BookingRow = {
