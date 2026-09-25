@@ -21,9 +21,11 @@ const registerSchema = loginSchema.extend({
 });
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    mode: search.mode === "register" ? ("register" as const) : ("login" as const),
-    redirect: typeof search.redirect === "string" ? search.redirect : undefined,
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { mode?: "login" | "register"; redirect?: string } => ({
+    ...(search["mode"] === "register" ? { mode: "register" as const } : { mode: "login" as const }),
+    ...(typeof search["redirect"] === "string" ? { redirect: search["redirect"] } : {}),
   }),
   head: () => ({
     meta: [
