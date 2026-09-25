@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as MyBookingsRouteImport } from './routes/my-bookings'
 import { Route as BookShowtimeIdRouteImport } from './routes/book.$showtimeId'
+import { Route as BookingReferenceRouteImport } from './routes/booking.$reference'
 import { Route as MovieSlugRouteImport } from './routes/movie.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -24,9 +26,19 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyBookingsRoute = MyBookingsRouteImport.update({
+  id: '/my-bookings',
+  path: '/my-bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BookShowtimeIdRoute = BookShowtimeIdRouteImport.update({
   id: '/book/$showtimeId',
   path: '/book/$showtimeId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingReferenceRoute = BookingReferenceRouteImport.update({
+  id: '/booking/$reference',
+  path: '/booking/$reference',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MovieSlugRoute = MovieSlugRouteImport.update({
@@ -38,34 +50,61 @@ const MovieSlugRoute = MovieSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/my-bookings': typeof MyBookingsRoute
   '/book/$showtimeId': typeof BookShowtimeIdRoute
+  '/booking/$reference': typeof BookingReferenceRoute
   '/movie/$slug': typeof MovieSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/my-bookings': typeof MyBookingsRoute
   '/book/$showtimeId': typeof BookShowtimeIdRoute
+  '/booking/$reference': typeof BookingReferenceRoute
   '/movie/$slug': typeof MovieSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/my-bookings': typeof MyBookingsRoute
   '/book/$showtimeId': typeof BookShowtimeIdRoute
+  '/booking/$reference': typeof BookingReferenceRoute
   '/movie/$slug': typeof MovieSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/book/$showtimeId' | '/movie/$slug'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/my-bookings'
+    | '/book/$showtimeId'
+    | '/booking/$reference'
+    | '/movie/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/book/$showtimeId' | '/movie/$slug'
-  id: '__root__' | '/' | '/auth' | '/book/$showtimeId' | '/movie/$slug'
+  to:
+    | '/'
+    | '/auth'
+    | '/my-bookings'
+    | '/book/$showtimeId'
+    | '/booking/$reference'
+    | '/movie/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/my-bookings'
+    | '/book/$showtimeId'
+    | '/booking/$reference'
+    | '/movie/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  MyBookingsRoute: typeof MyBookingsRoute
   BookShowtimeIdRoute: typeof BookShowtimeIdRoute
+  BookingReferenceRoute: typeof BookingReferenceRoute
   MovieSlugRoute: typeof MovieSlugRoute
 }
 
@@ -85,11 +124,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-bookings': {
+      id: '/my-bookings'
+      path: '/my-bookings'
+      fullPath: '/my-bookings'
+      preLoaderRoute: typeof MyBookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/book/$showtimeId': {
       id: '/book/$showtimeId'
       path: '/book/$showtimeId'
       fullPath: '/book/$showtimeId'
       preLoaderRoute: typeof BookShowtimeIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/$reference': {
+      id: '/booking/$reference'
+      path: '/booking/$reference'
+      fullPath: '/booking/$reference'
+      preLoaderRoute: typeof BookingReferenceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/movie/$slug': {
@@ -105,7 +158,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  MyBookingsRoute: MyBookingsRoute,
   BookShowtimeIdRoute: BookShowtimeIdRoute,
+  BookingReferenceRoute: BookingReferenceRoute,
   MovieSlugRoute: MovieSlugRoute,
 }
 export const routeTree = rootRouteImport

@@ -25,9 +25,8 @@ type Movie = {
 const GENRES = ["Action", "Drama", "Comedy", "Thriller"];
 
 export const Route = createFileRoute("/")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    q: typeof search.q === "string" ? search.q : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { q?: string } =>
+    typeof search["q"] === "string" ? { q: search["q"] } : {},
   head: () => ({
     meta: [
       { title: "Now Showing — Cineverse Movie Tickets" },
