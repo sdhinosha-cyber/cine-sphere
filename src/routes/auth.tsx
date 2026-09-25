@@ -147,7 +147,7 @@ function AuthPage() {
                 maxLength={80}
                 placeholder="Riya Sharma"
               />
-              {errors.name && <p className="text-xs text-destructive">{errors.name}</p>}
+              {errors['name'] && <p className="text-xs text-destructive">{errors['name']}</p>}
             </div>
           )}
           <div className="space-y-2">
@@ -160,7 +160,7 @@ function AuthPage() {
               maxLength={255}
               placeholder="you@example.com"
             />
-            {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
+            {errors['email'] && <p className="text-xs text-destructive">{errors['email']}</p>}
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
@@ -172,7 +172,7 @@ function AuthPage() {
               maxLength={72}
               placeholder="At least 6 characters"
             />
-            {errors.password && <p className="text-xs text-destructive">{errors.password}</p>}
+            {errors['password'] && <p className="text-xs text-destructive">{errors['password']}</p>}
           </div>
 
           <Button type="submit" className="w-full" disabled={busy}>
